@@ -1,6 +1,7 @@
 import streamlit as st
 import os
-import langchain st.write("LangChain version:", langchain.__version__)
+import langchain 
+st.write("LangChain version:", langchain.__version__)
 from langchain_google_genai import ChatGoogleGenerativeAI, GoogleGenerativeAIEmbeddings
 from langchain_community.document_loaders import DirectoryLoader, PyPDFLoader, Docx2txtLoader
 from langchain_text_splitters import RecursiveCharacterTextSplitter
@@ -126,3 +127,4 @@ if prompt := st.chat_input("Em que posso ajudar hoje?"):
             st.markdown(full_response)
 
             st.session_state.messages.append({"role": "assistant", "content": full_response})
+
