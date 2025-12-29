@@ -1,4 +1,5 @@
 import streamlit as st
+st.write("DEBUG | secrets keys:", list(st.secrets.keys()))
 import os
 import langchain 
 st.write("LangChain version:", langchain.__version__)
@@ -12,10 +13,13 @@ from langchain.prompts import ChatPromptTemplate, SystemMessagePromptTemplate, H
 
 # --- 1. CONFIGURAÇÃO DE SEGURANÇA ---
 # No Streamlit Cloud, coloque a chave em Settings -> Secrets
+st.write("Secrets encontrados:", list(st.secrets.keys()))
+
 if "GOOGLE_API_KEY" in st.secrets:
     os.environ["GOOGLE_API_KEY"] = st.secrets["GOOGLE_API_KEY"]
+    st.success("GOOGLE_API_KEY carregada com sucesso")
 else:
-    st.error("⚠️ ERRO: Configure a 'GOOGLE_API_KEY' nos Secrets do Streamlit.")
+    st.error("GOOGLE_API_KEY NÃO encontrada")
     st.stop()
 
 # --- 2. MOTOR DE INTELIGÊNCIA (RAG) ---
@@ -127,4 +131,5 @@ if prompt := st.chat_input("Em que posso ajudar hoje?"):
             st.markdown(full_response)
 
             st.session_state.messages.append({"role": "assistant", "content": full_response})
+
 
